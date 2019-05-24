@@ -1,0 +1,4 @@
+chrome-devtools-frontend:
+  image: awardell/chrome-devtools-frontend
+  ports:
+    - 8090:8090
