@@ -1,4 +1,20 @@
-chrome-devtools-frontend:
-  image: awardell/chrome-devtools-frontend
-  ports:
-    - 8090:8090
+version: "3.7"
+  
+networks:
+  chrome-devtools-frontend-network:
+    driver: overlay
+
+services:
+  chrome-devtools-frontend:
+    image: docker.pkg.github.com/june07/docker-chrome-devtools-frontend/latest
+    ports:
+      - target: 8090
+        published: 8091
+        protocol: tcp
+        mode: ingress
+    networks:
+      - chrome-devtools-frontend-network
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
